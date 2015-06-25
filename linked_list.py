@@ -50,7 +50,7 @@ class LinkList(object):
         while current:
             output += (current.val,)
             current = current.next_node()
-        print(output)
+        return output
 
     def remove(self, node):
         """
@@ -58,22 +58,23 @@ class LinkList(object):
             arg:
                 node: String value associated with the val property of Node
         """
-        self.size += 1
+        self.size -= 1
         current = self.head
         prev = None
         exists = False
-        while current and exists is False:
-            if current.get_info() == node:
+        while current and (exists is False):
+            # Must compare nodes' values to determine if we've found it
+            if current.get_info() == node.get_info():
                 exists = True
             else:
                 prev = current
                 current = current.next_node()
-            if not current:
-                raise ValueError("That Node is not in this list")
-            if not prev:
-                self.head = current.next_node()
-            else:
-                prev.set_next(current.next_node())
+        if not current:
+            raise ValueError("That Node is not in this list")
+        if not prev:
+            self.head = current.next_node()
+        else:
+            prev.set_next(current.next_node())
 
     def insert(self, val):
         """
@@ -92,5 +93,5 @@ class LinkList(object):
         if not current:
             raise ValueError('There are no Nodes left in the list')
         self.head = current.next_node()
-        self.size += 1
+        self.size -= 1
         return current.val
