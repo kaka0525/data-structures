@@ -1,5 +1,5 @@
 # data-structures
 
-It hold sample code for a number of classic data structures implemented in Python.
+It holds sample code for a number of classic data structures implemented in Python.
 
-conllaborator: Scott Schmidt, Karen Wong
+collaborators: Scott Schmidt, Karen Wong
