@@ -19,11 +19,15 @@ def test_list_display():
     li.insert('node1')
     li.insert('node2')
     li.insert('node3')
-    assert li.display == (u'node3', u'node2', u'node1')
+    assert li.display() == ('node3', 'node2', 'node1')
 
 
 def test_list_remove():
-    pass
+    li = LinkList('List')
+    li.insert('node1')
+    li.insert('node2')
+    li.insert('node3')
+    li.remove('node3')
 
 
 def test_list_insert():
