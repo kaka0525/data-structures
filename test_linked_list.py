@@ -1,6 +1,5 @@
 import pytest
 from linked_list import LinkList
-from linked_list import Node
 
 
 def test_list_size():
@@ -16,7 +15,7 @@ def test_list_size():
     assert empty.size_ is 0
     assert one_node.size_ is 1
     assert many_nodes.size_ is 5
-    many_nodes.remove(Node('node3'))
+    many_nodes.remove('node3')
     assert many_nodes.size_ is 4
 
 
@@ -52,9 +51,9 @@ def test_list_display():
     many_nodes.insert('node6')
     many_nodes.pop()
     empty = LinkList()
-    assert li.display() == "('node3', 'node2', 'node1', )"
-    assert many_nodes.display() == "('node5', 'node4', 'node3', 'node2', 'node1', )"
-    assert empty.display() == ()
+    assert li.display() == "('node3','node2','node1')"
+    assert many_nodes.display() == "('node5','node4','node3','node2','node1')"
+    assert empty.display() == li
 
 
 def test_list_remove():

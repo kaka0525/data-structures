@@ -52,18 +52,20 @@ class LinkList(object):
                 node: String value associated with the val property of Node
         """
         current = self.head
-        prev = None
-        while current:
-            if current.val == node:
-                break
-            else:
-                prev = current
-                current = current.pointer
-        if not prev:
-            self.head = current.pointer
-        else:
-            prev = current.pointer
+        next_node = self.head.pointer
+        if current == node:
+            self.head = self.head.pointer
+            current.pointer = None
             self.size_ -= 1
+        else:
+            while next_node is not None:
+                if next_node == node:
+                    current.pointer = next_node.pointer
+                    next_node.pointer = None
+                    break
+                else:
+                    current = current.pointer
+                    next_node = next_node.pointer
 
     def insert(self, val):
         """
