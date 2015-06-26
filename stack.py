@@ -1,16 +1,13 @@
-from linked_list import LinkList
+from linked_list import LinkedList
 
 
 class Stack(object):
-    def __init__(self, top=None):
-        self.top = top
-        self.ll = LinkList()
+    def __init__(self):
+        self.ll = LinkedList()
 
     def push(self, val):
         self.ll.insert(val)
-        self.top = self.ll.head
 
     def pop(self):
         self.ll.pop()
-        self.top = self.ll.head
-        return self.top.val
+        return self.ll.head.val
