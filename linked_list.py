@@ -30,7 +30,7 @@ class LinkList(object):
                 current = current.pointer
         if not current:
             return None
-        return current.val
+        return current
 
     def display(self):
         """Display the current Nodes in the list as a tuple"""
@@ -45,23 +45,24 @@ class LinkList(object):
         output += ")"
         return output
 
-    def remove(self, node):
+    def remove(self, node_val):
         """
         Remove desired Node from list
             arg:
-                node: String value associated with the val property of Node
+                node_val: String value associated with the val property of Node
         """
         current = self.head
         next_node = self.head.pointer
-        if current == node:
+        if current.val == node_val:
             self.head = self.head.pointer
             current.pointer = None
             self.size_ -= 1
         else:
             while next_node is not None:
-                if next_node == node:
+                if next_node.val == node_val:
                     current.pointer = next_node.pointer
                     next_node.pointer = None
+                    self.size_ -= 1
                     break
                 else:
                     current = current.pointer
