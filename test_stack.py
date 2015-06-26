@@ -1,4 +1,4 @@
-import pytest
+# import pytest
 from stack import Stack
 
 
@@ -21,5 +21,3 @@ def test_pop_from_stack():
     assert new_stack_pop.top.val is 'box2'
     new_stack_pop.pop()
     assert new_stack_pop.top.val is 'box1'
-    with pytest.raises(TypeError):
-        pass  # Need to verify error

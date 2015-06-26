@@ -11,6 +11,6 @@ class Stack(object):
         self.top = self.ll.head
 
     def pop(self):
-        self.ll = LinkList()
         self.ll.pop()
         self.top = self.ll.head
+        return self.top.val
