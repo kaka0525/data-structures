@@ -4,7 +4,7 @@ class Node(object):
         self.pointer = pointer
 
 
-class LinkList(object):
+class LinkedList(object):
     def __init__(self, values=None, head=None):
         self.head = head
         self.size_ = 0
