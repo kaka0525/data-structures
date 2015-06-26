@@ -82,7 +82,7 @@ class LinkedList(object):
         """Remove first Node from list, and assign next Node as new Head"""
         current = self.head
         if not current:
-            raise ValueError('There are no Nodes left in the list')
+            raise IndexError("Stack is empty")
         self.head = current.pointer
         self.size_ -= 1
         return current.val
