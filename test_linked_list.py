@@ -31,10 +31,6 @@ def test_list_search():
     assert many_nodes.search('node5') is many_nodes.head
     assert (many_nodes.search('node3') is
             many_nodes.head.pointer.pointer)
-    with pytest.raises(ValueError):
-        many_nodes.search('node6')
-    with pytest.raises(ValueError):
-        many_nodes.search('node7')
 
 
 def test_list_display():
@@ -53,7 +49,7 @@ def test_list_display():
     empty = LinkList()
     assert li.display() == "('node3','node2','node1')"
     assert many_nodes.display() == "('node5','node4','node3','node2','node1')"
-    assert empty.display() == li
+    assert empty.display() == "()"
 
 
 def test_list_remove():
@@ -74,10 +70,9 @@ def test_list_remove():
     one_node.insert('node1')
     one_node.remove('node1')
     assert li.size_ is 2
-    assert li.display() == ('node2', 'node1')
+    assert li.display() == "('node2','node1')"
     assert many_nodes.size_ is 5
-    assert many_nodes.display() == ('node6', 'node5', 'node3',
-                                    'node2', 'node1')
+    assert many_nodes.display() == "('node6','node5','node3','node2','node1')"
     assert one_node.size_ is 0
 
 
