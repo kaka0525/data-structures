@@ -20,20 +20,19 @@ class LinkedList(object):
         """
         Find desired Node within list
             arg:
-                val: String value associated with the val property of Node
+                val: Value associated with the val property of Node
         """
-        current = self.head
-        while current:
-            if current.val == val:
-                break
-            else:
-                current = current.pointer
-        if not current:
-            return None
-        return current
+        current = self.size()
+        next_node = self.head
+        for num in range(current):
+            if next_node.val == val:
+                return next_node
+            next_node = next_node.pointer
+        return None
 
     def display(self):
-        """Display the current Nodes in the list as a tuple"""
+        """Display the current Nodes in the list as a string representation
+        of a tuple type"""
         current = self.head
         output = "("
         while current is not None:
@@ -49,24 +48,16 @@ class LinkedList(object):
         """
         Remove desired Node from list
             arg:
-                node_val: String value associated with the val property of Node
+                node_val: Value associated with the val property of Node
         """
         current = self.head
-        next_node = self.head.pointer
-        if current.val == node_val:
-            self.head = self.head.pointer
-            current.pointer = None
-            self.size_ -= 1
-        else:
-            while next_node is not None:
-                if next_node.val == node_val:
-                    current.pointer = next_node.pointer
-                    next_node.pointer = None
-                    self.size_ -= 1
-                    break
-                else:
-                    current = current.pointer
-                    next_node = next_node.pointer
+        rem_node = self.search(node_val)
+        while current is not None:
+            if current.pointer is rem_node:
+                current.pointer = rem_node.pointer
+                self.size_ -= 1
+            else:
+                current = current.pointer
 
     def insert(self, val):
         """
@@ -85,4 +76,4 @@ class LinkedList(object):
             raise IndexError("Stack is empty")
         self.head = current.pointer
         self.size_ -= 1
-        return current.val
+        return self.size()

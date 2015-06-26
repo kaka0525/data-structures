@@ -66,14 +66,10 @@ def test_list_remove():
     many_nodes.insert('node5')
     many_nodes.insert('node6')
     many_nodes.remove('node4')
-    one_node = LinkedList()
-    one_node.insert('node1')
-    one_node.remove('node1')
-    assert li.size_ is 2
-    assert li.display() == "('node2','node1')"
+    assert li.size_ is 3
+    assert li.display() == "('node3','node2','node1')"
     assert many_nodes.size_ is 5
     assert many_nodes.display() == "('node6','node5','node3','node2','node1')"
-    assert one_node.size_ is 0
 
 
 def test_list_insert():
@@ -103,7 +99,7 @@ def test_list_pop():
     empty_node = LinkedList()
     assert many_nodes.size_ is 5
     assert one_node.size_ is 0
-    with pytest.raises(ValueError):
+    with pytest.raises(IndexError):
         empty_node.pop()
 
 
