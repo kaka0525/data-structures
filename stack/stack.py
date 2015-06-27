@@ -10,4 +10,3 @@ class Stack(object):
 
     def pop(self):
         self.ll.pop()
-        return self.ll.head.val

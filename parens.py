@@ -31,7 +31,7 @@ def paren_check(uni_str):
             else:
                 s.pop()
 
-        count = count + 1
+        count += 1
 
     if balanced and s.ll.size_ == 0:
         return 0
