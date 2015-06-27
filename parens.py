@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from stack import Stack
 
 
 def paren_check(uni_str):
@@ -17,23 +16,14 @@ def paren_check(uni_str):
             -1: Return -1 value if closing parenthesis is provided without
                 first providing opening parenthesis.
     """
-    s = Stack()
-    balanced = True
     count = 0
-    while count < len(uni_str) and balanced:
-        char = uni_str[count]
-        if char == "(":
-            s.push(char)
-        elif char == ")":
-            if s.ll.size_ == 0:
-                return -1
-                balanced = False
-            else:
-                s.pop()
-
-        count += 1
-
-    if balanced and s.ll.size_ == 0:
-        return 0
-    else:
+    for char in uni_str:
+        if char == '(':
+            count += 1
+        if char == ')':
+            count -= 1
+        if count == -1:
+            return count
+    if count > 0:
         return 1
+    return count
