@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from stack.stack import Stack
+from stack import Stack
 
 
 def paren_check(uni_str):
