@@ -12,3 +12,13 @@ Current Data Structures in this repo:
     * We modeled the Stack data structure by first writing tests. This project was quite a bit easier given the limited functionality of a stack, and the fact that we were able to use the concept of Composition to accomplish our task. We drew on the pre-existing methods of the Linked List to manage each of the tasks of our Stack.
 
 collaborators: Scott Schmidt, Karen Wong
+
+
+Interview Challenge: Proper Parenthetics
+*Build a quick Python function that takes a unicode string (text) as input and returns one of three possible values:
+
+    *Return 1 if the string is "open" (there are open parens that are not closed)
+    *Return 0 if the string is "balanced" (there are an equal number of open and closed parentheses in the string)
+    *Return -1 if the string is "broken" (a closing parens has not been proceeded by one that opens)
+
+source: http://interactivepython.org/courselib/static/pythonds/BasicDS/SimpleBalancedParentheses.html
