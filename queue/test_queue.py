@@ -26,8 +26,10 @@ def test_add_many(queue):
 
 def test_dequeue(queue):
     assert queue.size_ is 2
+    assert queue.front.val is 1
     queue.dequeue()
     assert queue.size_ is 1
+    assert queue.front.val is 2
     queue.dequeue()
     assert queue.size_ is 0
 
