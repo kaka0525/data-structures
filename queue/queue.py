@@ -42,6 +42,7 @@ class Queue(object):
         self.front = current.next_node
         current.next_node = None
         self.size_ -= 1
+        return current.val
 
     def size(self):
         """Return the current amount of Nodes in the queue as size"""
