@@ -30,15 +30,15 @@ def test_dequeue(queue):
     queue.dequeue()
     assert queue.size_ is 1
     assert queue.front.val is 2
-    queue.dequeue()
+    with pytest.raises(IndexError):
+        queue.dequeue()
     assert queue.size_ is 0
 
 
 def test_dequeue_empty(queue):
     assert queue.size_ is 2
     queue.dequeue()
-    queue.dequeue()
-    with pytest.raises(Exception):
+    with pytest.raises(IndexError):
         queue.dequeue()
 
 
@@ -47,5 +47,6 @@ def test_size(queue):
     assert queue.size_ is not 1 or 3
     assert type(queue.size_) is int
     queue.dequeue()
-    queue.dequeue()
+    with pytest.raises(IndexError):
+        queue.dequeue()
     assert queue.size_ is 0

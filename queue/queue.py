@@ -38,11 +38,16 @@ class Queue(object):
         Remove Node from Front of queue, and assign next Node in line as
         Front of queue.
         """
+
         current = self.front
-        self.front = current.next_node
-        current.next_node = None
         self.size_ -= 1
+        if not current.next_node:
+            raise IndexError("Queue is empty")
+        self.front = current.next_node
         return current.val
+        # current.next_node = None
+        # self.size_ -= 1
+        # return current.val
 
     def size(self):
         """Return the current amount of Nodes in the queue as size"""
