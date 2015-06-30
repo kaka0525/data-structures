@@ -12,7 +12,7 @@ class Queue(object):
     def __init__(self, back=None, front=None):
         self.back = back
         self.front = front
-        self.size_ = 0
+        self._size = 0
 
     def enqueue(self, val):
         """
@@ -22,33 +22,31 @@ class Queue(object):
             arg:
                 val: Value associated as the data of the Node
         """
+        node = Node(val)
+        self.back = node
+        self._size += 1
+
         if self.front is None:
-            node = Node(val)
             self.front = node
-            self.back = node
-            self.size_ += 1
         else:
             node = Node(val)
             self.back.next_node = node
-            self.back = node
-            self.size_ += 1
 
     def dequeue(self):
         """
         Remove Node from Front of queue, and assign next Node in line as
         Front of queue.
         """
-
+        # Write a test to verify the fix for self.back.
         current = self.front
-        self.size_ -= 1
-        if not current.next_node:
+        if not current:
+            self.back = None
+            # Back pointer needs to be removed when current.next node is None
             raise IndexError("Queue is empty")
         self.front = current.next_node
+        self._size -= 1
         return current.val
-        # current.next_node = None
-        # self.size_ -= 1
-        # return current.val
 
     def size(self):
         """Return the current amount of Nodes in the queue as size"""
-        return self.size_
+        return self._size
