@@ -16,27 +16,27 @@ class Doublylinkedlist(object):
 
     def insert(self, val):
         """ Insert the value 'val' at the head of the list"""
+        new_node = Node(val)
         if self.head is None:
-            new_node = Node(val)
-            self.head = new_node
             self.tail = new_node
         else:
-            new_node = Node(val)
             new_node.next_node = self.head
             self.head.prev = new_node
-            self.head = new_node
+
+        self.head = new_node
 
     def append(self, val):
         """Append the value 'val' at the tail of the list"""
         new_node = Node(val)
         current = self.tail
         if current is None:
-            self.tail, self.head = new_node
+            self.head = new_node
             new_node.next_node, new_node.prev = new_node
         else:
             current.prev = new_node
             new_node.next_node = current
-            self.tail = new_node
+
+        self.tail = new_node
 
     def pop(self):
         """Pop the first value off the head of the list and return it"""
