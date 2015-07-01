@@ -50,12 +50,12 @@ class Doublylinkedlist(object):
     def shift(self):
         """Remove the tail value from the tail of the list and return it"""
         current = self.tail
-        if self.tail is None:
-            raise ValueError("The list is empty")
-        elif self.head is current:
+        if not self.head:
+            raise ValueError('The list is empty')
+        elif self.head == self.tail:
             self.head = self.tail = None
         else:
-            current.prev.next_node = None
+            self.tail.prev.next = None
             self.tail = self.tail.prev
         return current.val
 
