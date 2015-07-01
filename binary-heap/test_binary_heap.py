@@ -12,7 +12,7 @@ def test_push_to_new_heap(heap):
     heap.push(18)
     assert heap.heap_list[4] is 18
     heap.push(2)
-    assert heap.heap_list[4] is 2
+    assert heap.heap_list[1] is 2
     assert heap.heap_list[-1] is 18
 
 
