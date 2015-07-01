@@ -25,7 +25,6 @@ class MinBinaryHeap(object):
             while val < current[p_index]:
                 current[idx], current[p_index] = current[p_index], current[idx]
                 idx = p_index
-                # p_index = int(ceil((idx / 2.0) - 1))
         else:
             if len(current) is 2:
                 if current[0] > current[1]:
