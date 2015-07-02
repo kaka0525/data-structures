@@ -8,16 +8,30 @@ class PriorityQ(object):
         self._order = 1
 
     def _create_priorities(self, pri):
-        """Create new Heap based on priority argument"""
+        """
+        Create new Heap based on priority argument
+            args:
+                pri: This value will dictate the priority of the Heap,
+                    in range of 1 (highest) to 10 (lowest).
+        """
         heaps = self.priorities
         heaps[pri] = MinBinaryHeap()
 
-    def _check_priority(self):
-        pass
+    def _remove_key(self):
+        """
+        Remove empty Heap from the Priority Queue's dictionary.
+        """
+        heaps = self.priorities
+        keys = heaps.keys()
+        keys = min(keys)
+        heaps.pop(keys)
 
     def insert(self, pri):
         """
-
+        Insert new node into Heap, based on priority. The order of the insert
+        is maintained by order dictating the value of the node in each Heap.
+            args:
+                pri: This value will dictate which Heap the node is placed in.
         """
         heaps = self.priorities
         if pri > 10 or pri < 1:
@@ -33,7 +47,9 @@ class PriorityQ(object):
 
     def pop(self):
         """
-
+        Removes the highest priority node from the queue. If pop is called
+        on an empty Heap, the empty Heap will be removed from the queue's
+        collection.
         """
 
         def sub_pop():
@@ -44,23 +60,30 @@ class PriorityQ(object):
             pop = heap.pop()
             return pop
 
-        def remove_key():
-            heaps = self.priorities
-            keys = heaps.keys()
-            keys = min(keys)
-            heaps.pop(keys)
-
         try:
             val = sub_pop()
         except IndexError:
-            remove_key()
+            self._remove_key()
             val = sub_pop()
 
         return val
 
     def peek(self):
         """
-        Checks to see what the most important item in the queue is,
-        and returns that value without removing it.
+        Provide the return value of the highest priority node in the Queue
+        without removing that value from the Queue.
         """
-        pass
+        heaps = self.priorities
+        keys = heaps.keys()
+        key = min(keys)
+        heap = heaps[key]
+        heap_list = heap.heap_list
+
+        if len(heap_list) == 0:
+            self._remove_key()
+            keys = heaps.keys()
+            key = min(keys)
+            heap = heaps[key]
+            heap_list = heap.heap_list
+
+        return heap_list[0]
