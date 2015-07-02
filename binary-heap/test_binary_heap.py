@@ -1,4 +1,4 @@
-from self_study_heap import MinBinaryHeap
+from binary_heap import MinBinaryHeap
 import pytest
 
 
