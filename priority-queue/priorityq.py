@@ -33,18 +33,30 @@ class PriorityQ(object):
 
     def pop(self):
         """
-        1. Iter over dict keys (sorted) until lowest value
-        2. grab dict, and pop top val
-        3. return val (if heap doesnt do that already)
+
         """
-        heaps = self.priorities
-        keys = heaps.keys()
-        keys = min(keys)
-        heap = heaps[keys]
+
+        def sub_pop():
+            heaps = self.priorities
+            keys = heaps.keys()
+            keys = min(keys)
+            heap = heaps[keys]
+            pop = heap.pop()
+            return pop
+
+        def remove_key():
+            heaps = self.priorities
+            keys = heaps.keys()
+            keys = min(keys)
+            heaps.pop(keys)
+
         try:
-            heap.pop()
+            val = sub_pop()
         except IndexError:
-            
+            remove_key()
+            val = sub_pop()
+
+        return val
 
     def peek(self):
         """
