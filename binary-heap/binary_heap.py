@@ -1,6 +1,9 @@
 #  encode
 from __future__ import unicode_literals
-from math import ceil
+
+
+def _get_parent_index(i):
+    return (i - 1) / 2
 
 
 def _get_left_child_index(i):
@@ -12,6 +15,7 @@ def _get_right_child_index(i):
 
 
 class MinBinaryHeap(object):
+
     def __init__(self, values=None):
         self.heap_list = []
         if values is not None:
@@ -24,44 +28,33 @@ class MinBinaryHeap(object):
         """
         Puts a new value into the heap, maintaining the heap property.
         """
-        current = self.heap_list
-        current.append(val)
-        p_index = 0
-        if len(current) > 2:
-            idx = len(current) - 1
-            p_index = int(ceil((idx / 2.0) - 1))
-            while val < current[p_index]:
-                current[idx], current[p_index] = current[p_index], current[idx]
-                idx = p_index
-                if p_index > 1:
-                    p_index = int(ceil((idx / 2.0) - 1))
-                else:
-                    p_index = 0
-        else:
-            if len(current) is 2.0:
-                if current[0] > current[1]:
-                    current[0], current[1] = current[1], current[0]
+        hlist = self.heap_list
+        hlist.append(val)
+        val_index = len(hlist) - 1
+        p_index = _get_parent_index(val_index)
+        while val_index > 0:
+            if hlist[p_index] > hlist[val_index]:
+                (hlist[p_index], hlist[val_index]) = (hlist[val_index],
+                                                      hlist[p_index])
+                val_index = p_index
+                p_index = _get_parent_index(val_index)
             else:
-                return current
-        return current
+                break
 
     def _swap_nodes(self, a_index, b_index):
-        current = self.heap_list
-        (current[a_index], current[b_index]) = (current[b_index],
-                                                current[a_index])
+        hlist = self.heap_list
+        (hlist[a_index], hlist[b_index]) = (hlist[b_index],
+                                            hlist[a_index])
 
     def pop(self):
-        """
-        Removes the "top" value in the heap, maintaining the heap property.
-        """
-        current = self.heap_list
-        if len(current) == 0:
+        hlist = self.heap_list
+        if len(hlist) == 0:
             raise IndexError("The heap is empty")
         else:
-            return_val = current[0]
-            current[0] = current[-1]
-            del current[-1]
-            max_index = len(current) - 1
+            return_val = hlist[0]
+            hlist[0] = hlist[-1]
+            del hlist[-1]
+            max_index = len(hlist) - 1
             current_index = 0
             while True:
                 left_child_index = _get_left_child_index(current_index)
@@ -70,15 +63,15 @@ class MinBinaryHeap(object):
                 if left_child_index > max_index:
                     break
                 elif (right_child_index > max_index and
-                        current[left_child_index] < current[current_index]):
+                        hlist[left_child_index] < hlist[current_index]):
                     self._swap_nodes(current_index, left_child_index)
                     break
-                elif (current[left_child_index] <= current[right_child_index] and
-                        current[left_child_index] < current[current_index]):
+                elif (hlist[left_child_index] <= hlist[right_child_index] and
+                        hlist[left_child_index] < hlist[current_index]):
                     self._swap_nodes(current_index, left_child_index)
                     current_index = left_child_index
-                elif (current[right_child_index] < current[left_child_index] and
-                        current[right_child_index] < current[current_index]):
+                elif (hlist[right_child_index] < hlist[left_child_index] and
+                        hlist[right_child_index] < hlist[current_index]):
                     self._swap_nodes(current_index, right_child_index)
                     current_index = right_child_index
                 else:
