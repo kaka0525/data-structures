@@ -24,7 +24,7 @@ def test_pop_from_heap(heap):
 
 def test_pop_from_empty_heap():
     with pytest.raises(IndexError):
-        heap.pop()
+        MinBinaryHeap().pop()
 
 
 def test_push_iter_to_heap():
