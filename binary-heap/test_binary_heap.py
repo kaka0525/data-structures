@@ -36,3 +36,15 @@ def test_push_iter_to_heap():
 def test_push_non_iter_to_heap():
     with pytest.raises(TypeError):
         MinBinaryHeap(['beans', 'bears', 'bottles'])
+
+
+def test_edge_case():
+    h = MinBinaryHeap([1, 5, 8, 7, 9, 10, 11])
+    h.push(4)
+    assert h.heap_list == [1, 4, 8, 5, 9, 10, 11, 7]
+
+
+def test_duplicate():
+    h = MinBinaryHeap([1, 2, 3])
+    h.push(1)
+    assert h.heap_list == [1, 1, 3, 2]
