@@ -41,4 +41,23 @@ class MinBinaryHeap(object):
         """
         Removes the "top" value in the heap, maintaining the heap property.
         """
-        pass
+        current = self.heap_list
+        try:
+            current[0], current[-1] = current[-1], current[0]
+            current.pop()
+        except:
+            try:
+                current.pop()
+            except IndexError:
+                raise IndexError('The list is empty.')
+        idx = 0
+        c_idx = (idx * 2) + 1
+        import pdb; pdb.set_trace()
+        while current[idx] > current[c_idx]:
+            current[idx], current[c_idx] = current[c_idx], current[idx]
+            idx = c_idx
+            if len(current) + 1 < c_idx:
+                c_idx = (idx * 2) + 1
+            else:
+                break
+        return current
