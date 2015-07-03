@@ -17,6 +17,10 @@ Current Data Structures in this repo:
   * A queue is structured, as described above, as an ordered collection of items which are added at one end, called the “rear,” and removed from the other end, called the “front.” Queues maintain a FIFO ordering property.
   * We approached writing our queue functionality by writing tests which would evaluate the outcome of adding and removing to and from the queue, as well as verifying the size of the queue. This data structure presented a challenge by having to rethink through the previous data structures, and modifying the functionality that we've implemented in the past to accomodate the FIFO properties of the Queue.
 
+## Doubly Linked List
+  * A doubly-linked list is a linked data structure that consists of a set of sequentially linked records called nodes. Each node contains two fields, called links, that are references to the previous and to the next node in the sequence of nodes.
+  * We completed this data structure with more ease than in past exercises. The different approach we took, by hand-drawing actionable steps within our data structure, helped visualize each step of the process, and made writing code much simpler!
+
 ## Binary Heap
   * A binary Heap is a complete binary tree which satisfies the heap ordering property. The ordering can be one of two types: the min-heap property: the value of each node is greater than or equal to the value of its parent, with the minimum-value element at the root.
   * The Binary heap was the most complicated data structure that we've completed thus far. It presented a logical challenge that pressed us to really consider how we wrote our code.
