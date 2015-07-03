@@ -12,7 +12,7 @@ def queue():
 
 def test_empty_queue():
     que = Queue()
-    assert que.size_ is 0
+    assert que._size is 0
     assert que.back is None
 
 
@@ -24,22 +24,22 @@ def test_add_many(queue):
 
 def test_dequeue(queue):
     queue.dequeue()
-    assert queue.size_ is 1
+    assert queue._size is 1
     with pytest.raises(IndexError):
         queue.dequeue()
-    assert queue.size_ is 0
+    assert queue._size is 0
 
 
 def test_dequeue_empty(queue):
-    assert queue.size_ is 2
+    assert queue._size is 2
     queue.dequeue()
     with pytest.raises(IndexError):
         queue.dequeue()
 
 
 def test_size(queue):
-    assert type(queue.size_) is int
+    assert type(queue._size) is int
     queue.dequeue()
     with pytest.raises(IndexError):
         queue.dequeue()
-    assert queue.size_ is 0
+    assert queue._size is 0
