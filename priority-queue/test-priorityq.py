@@ -23,8 +23,7 @@ def test_pq_insert(pq_setup):
     p6 = pq_setup.priorities[6]
     p6_len = len(p6.heap_list)
     pq_setup.insert(6)
-    assert len(p6.heap) == p6_len + 1
-
+    assert len(p6.heap_list) == p6_len + 1
 
 
 def test_pq_pop_with_arg(pq_setup):
