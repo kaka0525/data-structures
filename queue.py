@@ -39,12 +39,13 @@ class Queue(object):
         """
         # Write a test to verify the fix for self.back.
         current = self.front
+        if self._size > 0:
+            self._size -= 1
         if not current:
             self.back = None
             # Back pointer needs to be removed when current.next node is None
             raise IndexError("Queue is empty")
         self.front = current.next_node
-        self._size -= 1
         return current.val
 
     def size(self):
