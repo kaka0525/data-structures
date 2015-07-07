@@ -11,6 +11,9 @@ class Graph(object):
             self.g_dict.keys()
         )
 
+    def __getitem__(self, idx):
+        return self.g_dict[idx]
+
     def nodes(self):
         """Return a list of all nodes in the Graph."""
         return self.g_dict.keys()
@@ -29,7 +32,10 @@ class Graph(object):
             args:
                 val: Val association for new node
         """
-        self.g_dict.setdefault(val, [])
+        if val not in self.g_dict.keys():
+            self.g_dict[val] = []
+        else:
+            raise KeyError('That node already exists in the Graph')
 
     def add_edge(self, n1, n2):
         """
@@ -41,7 +47,7 @@ class Graph(object):
         try:
             self.g_dict[n1].append(n2)
         except KeyError:
-            self.g_dict.add_node(n1)
+            self.add_node(n1)
             self.g_dict[n1].append(n2)
 
     def del_node(self, val):
@@ -63,7 +69,7 @@ class Graph(object):
                 be deleted
         """
         try:
-            self.g_dict[n1].pop(n2)
+            self.g_dict[n1].remove(n2)
         except:
             raise KeyError(u'That edge does not exist in Graph')
 
