@@ -52,7 +52,11 @@ class Graph(object):
         if not self.has_node(n2):
             self.add_node(n2)
         try:
-            self.g_dict[n1].append(n2)
+            edges = self.neighbors(n1)
+            if n2 in edges:
+                pass
+            else:
+                self.g_dict[n1].append(n2)
         except KeyError:
             self.add_node(n1)
             self.g_dict[n1].append(n2)
