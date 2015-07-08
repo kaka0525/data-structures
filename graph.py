@@ -14,6 +14,9 @@ class Graph(object):
     def __getitem__(self, idx):
         return self.g_dict[idx]
 
+    def __iter__(self):
+        return iter(self.g_dict)
+
     def nodes(self):
         """Return a list of all nodes in the Graph."""
         return self.g_dict.keys()
@@ -22,9 +25,11 @@ class Graph(object):
         """Return a list of all edges in the Graph.
             Provides a list of all key/value pairs within the Graph dict
         """
-        for node in self.g_dict:
-            for edge in self.g_dict[node]:
-                print(node, edge)
+        edges = {}
+        for key in self.g_dict.keys():
+            edges[key] = self.g_dict[key]
+
+        return edges
 
     def add_node(self, val):
         """
@@ -44,6 +49,8 @@ class Graph(object):
             args:
                 n1, n2: Vals association for nodes to be connected
         """
+        if not self.has_node(n2):
+            self.add_node(n2)
         try:
             self.g_dict[n1].append(n2)
         except KeyError:
@@ -69,7 +76,7 @@ class Graph(object):
                 be deleted
         """
         try:
-            self.g_dict[n1].remove(n2)
+            self[n1].remove(n2)
         except:
             raise KeyError(u'That edge does not exist in Graph')
 
@@ -88,14 +95,11 @@ class Graph(object):
         in the Graph.
             args:
                 val: Val association for node"""
-        if val not in self.g_dict:
+        edges = self.edges()
+        if val not in edges:
             raise KeyError(u'That node does not exist in Graph')
-
-        neighbor_list = []
-        for node in self.g_dict:
-            if val in self.g_dict[node]:
-                neighbor_list.append(node)
-        return neighbor_list
+        else:
+            return edges[val]
 
     def adjacent(self, n1, n2):
         """Return Boolean value associated with the result of whether nodes,

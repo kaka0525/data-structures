@@ -30,11 +30,11 @@ def test_return_nodes(populate):
 
 
 def test_return_edges(populate):
-    # nodes = populate.nodes()
-    # node = nodes[0]
-    # edges = populate.edges()
-    # assert type(edge) is str
-    pass
+    nodes = populate.nodes()
+    node = nodes[0]
+    edges = populate.neighbors(node)
+    edge = edges[0]
+    assert type(edge) is str
 
 
 def test_add_new_node(populate):
@@ -64,20 +64,22 @@ def test_delete_edge(populate):
     edges = populate.neighbors(node)
     edge = edges[0]
     populate.del_edge(node, edge)
-    assert edge not in populate.edges(node)
+    edges = populate.neighbors(node)
+    assert edge not in edges
 
 
 def test_has_node(populate):
-    pass
+    nodes = populate.nodes()
+    node = nodes[0]
+    assert populate.has_node(node) is True
+    assert populate.has_node('Beans') is False
 
 
 def test_neighbors(populate):
-    pass
-
-
-def test_adjacent(populate):
-    pass
-
-
-def test_empty_graph():
-    pass
+    """
+    Intermitent failures? Either the test is wrong or
+    my setup fixture isn't working as intended."""
+    nodes = populate.nodes()
+    node = nodes[0]
+    edges = populate.neighbors(node)
+    assert populate.g_dict[node] == edges
