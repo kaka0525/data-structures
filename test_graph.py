@@ -15,7 +15,7 @@ def populate():
         create edges to iteself.
     """
     gph = Graph()
-    for num in range(10):
+    for num in range(20):
         try:
             rand = ascii_uppercase[randint(0, 25)]
             gph.add_node(rand)
@@ -23,7 +23,7 @@ def populate():
             continue
 
     nodes = gph.nodes()
-    for num in range(2):
+    for num in range(3):
         for node in nodes:
             rand = nodes[randint(0, len(nodes) - 1)]
             try:

@@ -1,7 +1,7 @@
 # Data-structures
 ## Authors: Karen Wong & Scott Schmidt
 
-It holds sample code for a number of classic data structures implemented in Python.
+This reposity holds sample code for a number of classic data structures implemented in Python during our 8-week Development Accelerator.
 
 Current Data Structures in this repo:
 
@@ -30,6 +30,9 @@ Current Data Structures in this repo:
   * A priority queue is an abstract data type which is like a regular queue or stack data structure, but where additionally each element has a "priority" associated with it. In a priority queue, an element with high priority is served before an element with low priority.
   * With the Binary Heap in place this data structure didn't present any major challenge other than planning and execution based on the available methods of the Binary Heap.
 
+## Graph & Graph Traversal
+  * A graph is a structure consisting of a set of arrays (also called dimensions) and a set of edges . An edge is a pair of vertices . The two vertices are called the edge endpoints.
+  * This data structure wasn't particularly difficult to build, though the traversal methods did take time to design and implement. The intent is to review this at a later date and accommodate any further knowledge into how the traversals are happening and whether these actions can be refactored to maximize efficiency.
 
 
 ## Interview Challenge: Proper Parenthetics

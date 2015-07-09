@@ -145,7 +145,7 @@ class Graph(object):
         _step_down(start, set(), path)
         return path
 
-    def breadth_trav(self, start):
+    def breadth_trav(self, start, time=False):
         """
         Return list of nodes in breadth-first traversal ordering, beginning
         at the node defined as start.
@@ -165,3 +165,13 @@ class Graph(object):
                 path.append(node)
                 holding.extend(self.g_dict[node])
         return path
+
+if __name__ == '__main__':
+    from test_graph import populate
+
+    graph = populate()
+    nodes = graph.nodes()
+    node = nodes[2]
+
+    print(graph.depth_trav(node))
+    print(graph.breadth_trav(node))
