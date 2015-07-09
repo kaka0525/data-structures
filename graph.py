@@ -7,7 +7,7 @@ class Graph(object):
         self.g_dict = {}
 
     def __repr__(self):
-        return "This graph's node values are {}".format(
+        return u"This graph's node values are {}".format(
             self.g_dict.keys()
         )
 
@@ -40,7 +40,7 @@ class Graph(object):
         if val not in self.g_dict.keys():
             self.g_dict[val] = []
         else:
-            raise KeyError('That node already exists in the Graph')
+            raise KeyError(u'That node already exists in the Graph')
 
     def add_edge(self, n1, n2):
         """
@@ -50,7 +50,7 @@ class Graph(object):
                 n1, n2: Vals association for nodes to be connected
         """
         if n1 == n2:
-            raise KeyError('Cannot create edge between node and itself')
+            raise KeyError(u'Cannot create edge between node and itself')
 
         if not self.has_node(n2):
             self.add_node(n2)
@@ -129,7 +129,7 @@ class Graph(object):
                 start: Node value which traversal will begin at.
         """
         if not self.has_node(start):
-            raise KeyError('That node does not exist in Graph')
+            raise KeyError(u'That node does not exist in Graph')
 
         path = []
 
@@ -145,9 +145,15 @@ class Graph(object):
         _step_down(start, set(), path)
         return path
 
-    def bredth_trav(self, start):
+    def breadth_trav(self, start):
+        """
+        Return list of nodes in breadth-first traversal ordering, beginning
+        at the node defined as start.
+            args:
+                start: Node value which traversal will begin at.
+        """
         if not self.has_node(start):
-            raise KeyError('That node does not exist in Graph')
+            raise KeyError(u'That node does not exist in Graph')
 
         path = []
         traveled = set()
@@ -159,10 +165,3 @@ class Graph(object):
                 path.append(node)
                 holding.extend(self.g_dict[node])
         return path
-
-
-"""
-g.breadth_first_traversal(start):
-    Perform a full breadth-first traversal of the graph, beginning at start.
-    Return the full visited path when traversal is complete.
-"""

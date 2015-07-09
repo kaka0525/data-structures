@@ -103,7 +103,7 @@ def test_depth_trav(populate):
         assert edges[0 - len(edges)] in trav
 
 
-def test_bredth_trav(populate):
+def test_breadth_trav(populate):
     """This is weak. Having a hard time asserting on unknowns."""
     with pytest.raises(KeyError):
         populate.depth_trav('beans')
