@@ -49,6 +49,9 @@ class Graph(object):
             args:
                 n1, n2: Vals association for nodes to be connected
         """
+        if n1 == n2:
+            raise KeyError('Cannot create edge between node and itself')
+
         if not self.has_node(n2):
             self.add_node(n2)
         try:
@@ -117,3 +120,49 @@ class Graph(object):
                 return False
         except KeyError:
             return False
+
+    def depth_trav(self, start):
+        """
+        Return list of nodes in depth-first traversal ordering, beginning
+        at the node defined as start.
+            args:
+                start: Node value which traversal will begin at.
+        """
+        if not self.has_node(start):
+            raise KeyError('That node does not exist in Graph')
+
+        path = []
+
+        def _step_down(node, traveled, path):
+            if node in traveled:
+                return
+
+            traveled.add(node)
+            path.append(node)
+            for c_node in self.g_dict[node]:
+                _step_down(c_node, traveled, path)
+
+        _step_down(start, set(), path)
+        return path
+
+    def bredth_trav(self, start):
+        if not self.has_node(start):
+            raise KeyError('That node does not exist in Graph')
+
+        path = []
+        traveled = set()
+        holding = [start]
+        while holding:
+            node = holding.pop(0)
+            if node not in traveled:
+                traveled.add(node)
+                path.append(node)
+                holding.extend(self.g_dict[node])
+        return path
+
+
+"""
+g.breadth_first_traversal(start):
+    Perform a full breadth-first traversal of the graph, beginning at start.
+    Return the full visited path when traversal is complete.
+"""

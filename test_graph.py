@@ -6,8 +6,14 @@ from random import randint
 
 @pytest.fixture()
 def populate():
+    """
+    Fixture will pre-populate x, range(x), random nodes in Graph.
+    In addition, it will also pre-populate edges for nodes that already exist.
+        This will not generate either duplicate nodes or edges, and will not
+        allow node to create edges to iteself.
+    """
     gph = Graph()
-    for num in range(15):
+    for num in range(10):
         try:
             rand = ascii_uppercase[randint(0, 25)]
             gph.add_node(rand)
@@ -15,10 +21,13 @@ def populate():
             continue
 
     nodes = gph.nodes()
-    for num in range(5):
+    for num in range(2):
         for node in nodes:
             rand = nodes[randint(0, len(nodes) - 1)]
-            gph.add_edge(node, rand)
+            try:
+                gph.add_edge(node, rand)
+            except KeyError:
+                continue
 
     return gph
 
@@ -76,10 +85,31 @@ def test_has_node(populate):
 
 
 def test_neighbors(populate):
-    """
-    Intermitent failures? Either the test is wrong or
-    my setup fixture isn't working as intended."""
     nodes = populate.nodes()
     node = nodes[0]
     edges = populate.neighbors(node)
     assert populate.g_dict[node] == edges
+
+
+def test_depth_trav(populate):
+    """This is weak. Having a hard time asserting on unknowns."""
+    with pytest.raises(KeyError):
+        populate.depth_trav('beans')
+    nodes = populate.nodes()
+    node = nodes[0]
+    edges = populate.neighbors(node)
+    trav = populate.depth_trav(node)
+    if len(edges) > 0:
+        assert edges[0 - len(edges)] in trav
+
+
+def test_bredth_trav(populate):
+    """This is weak. Having a hard time asserting on unknowns."""
+    with pytest.raises(KeyError):
+        populate.depth_trav('beans')
+    nodes = populate.nodes()
+    node = nodes[0]
+    edges = populate.neighbors(node)
+    trav = populate.depth_trav(node)
+    if len(edges) > 0:
+        assert edges[0 - len(edges)] in trav
