@@ -7,10 +7,12 @@ from random import randint
 @pytest.fixture()
 def populate():
     """
-    Fixture will pre-populate x, range(x), random nodes in Graph.
-    In addition, it will also pre-populate edges for nodes that already exist.
-        This will not generate either duplicate nodes or edges, and will not
-        allow node to create edges to iteself.
+    Fixture will pre-populate random, range(x), nodes in Graph.
+    In addition, it will also pre-populate random, range(y), edges for nodes
+        that already exist.
+
+    This will not generate duplicate nodes or edges, and will not allow node to
+        create edges to iteself.
     """
     gph = Graph()
     for num in range(10):
