@@ -38,31 +38,34 @@ class Graph(object):
                 val: Val association for new node
         """
         if val not in self.g_dict.keys():
-            self.g_dict[val] = []
+            self.g_dict[val] = {}
         else:
             raise KeyError(u'That node already exists in the Graph')
 
-    def add_edge(self, n1, n2):
+    def add_edge(self, n1, n2, weight):
         """
         Add a new edge connecting two nodes, n1 and n2, to the Graph.
         If either n1 or n2 do not exist, they will be added to the Graph.
             args:
                 n1, n2: Vals association for nodes to be connected
+                weight: Weighted value of traveling from node to node, n1 to n2
         """
+        update = {n2: weight}
         if n1 == n2:
             raise KeyError(u'Cannot create edge between node and itself')
-
-        if not self.has_node(n2):
-            self.add_node(n2)
         try:
             edges = self.neighbors(n1)
             if n2 in edges:
                 pass
             else:
-                self.g_dict[n1].append(n2)
+                if self.has_node(n2):
+                    self.g_dict[n1].update(update)
+                else:
+                    self.add_node(n2)
+                    self.g_dict[n1].update(update)
         except KeyError:
             self.add_node(n1)
-            self.g_dict[n1].append(n2)
+            self.g_dict[n1].update(update)
 
     def del_node(self, val):
         """
@@ -83,7 +86,7 @@ class Graph(object):
                 be deleted
         """
         try:
-            self[n1].remove(n2)
+            del self.g_dict[n1][n2]
         except:
             raise KeyError(u'That edge does not exist in Graph')
 
