@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/kaka0525/data-structures.svg?branch=master)](https://travis-ci.org/kaka0525/data-structures)
+
 # Data-structures
 ## Authors: Karen Wong & Scott Schmidt
 
