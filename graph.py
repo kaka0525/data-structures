@@ -1,5 +1,6 @@
 # _*_ encode: utf-8 _*_
 from __future__ import unicode_literals
+from queue import Queue
 
 
 class Graph(object):
@@ -168,6 +169,34 @@ class Graph(object):
                 path.append(node)
                 holding.extend(self.g_dict[node])
         return path
+
+    def BellmanFord(self, start):
+        """ !! Currently not working...
+        Returns the shortest path possibilities of the graph from the start.
+        """
+        distance = {}
+        predecessor = {}
+
+        for node in self.nodes():
+            if node == start:
+                distance[node] = 0
+            else:
+                distance[node] = float('inf')
+                predecessor[node] = None
+
+        for i in range(len(self.g_dict)):
+            for edge in self.edges():
+                import pdb; pdb.set_trace()
+                if distance[edge[0]] + self.g_dict[edge[0]].values()[1] < distance[edge[1]]:
+                    distance[edge[1]] = distance[edge[0]] + self.g_dict[edge[0]].values()[1]
+                    predecessor[edge[1]] = edge[0]
+
+        for edge in self.edges():
+            if distance[edge[0]] + self.g_dict[edge[0]].values()[1] < distance[edge[1]]:
+                raise ValueError("Graph contains a negative-weight cycle")
+
+        return distance, predecessor
+
 
 if __name__ == '__main__':
     from test_graph import populate

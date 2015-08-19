@@ -26,7 +26,7 @@ def populate():
     for num in range(3):
         for node in nodes:
             rand = nodes[randint(0, len(nodes) - 1)]
-            weight = randint(0, 100)
+            weight = randint(-100, 101)
             try:
                 gph.add_edge(node, rand, weight)
             except KeyError:
