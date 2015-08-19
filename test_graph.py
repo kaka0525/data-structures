@@ -4,6 +4,43 @@ from string import ascii_uppercase
 from random import randint
 
 
+def test_dijkstra1():
+    g = Graph()
+    g.add_node('A')
+    g.add_node('B')
+    g.add_node('C')
+    g.add_edge('A', 'B', 3)
+    g.add_edge('A', 'C', 1)
+    g.add_edge('C', 'B', 1)
+    distances, prevs = g.dijkstra_shortest_path('A')
+    assert distances['A'] == 0
+    assert distances['B'] == 2
+    assert distances['C'] == 1
+    assert 'A' not in prevs
+    assert prevs['B'] == 'C'
+    assert prevs['C'] == 'A'
+
+
+def test_dijkstra2():
+    g = Graph()
+    g.add_node('A')
+    g.add_node('B')
+    g.add_node('C')
+    g.add_node('D')
+    g.add_node('E')
+    g.add_edge('A', 'B', 3)
+    g.add_edge('A', 'C', 1)
+    g.add_edge('C', 'D', 1)
+    g.add_edge('D', 'E', 1)
+    g.add_edge('E', 'B', 1)
+    distances, prevs = g.dijkstra_shortest_path('A')
+    assert distances['A'] == 0
+    assert distances['B'] == 3
+    assert distances['C'] == 1
+    assert distances['D'] == 2
+    assert distances['E'] == 3
+
+
 @pytest.fixture()
 def populate():
     """
