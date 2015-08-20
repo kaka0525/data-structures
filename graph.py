@@ -1,10 +1,7 @@
 # _*_ encode: utf-8 _*_
 from __future__ import unicode_literals
-<<<<<<< HEAD
 from queue import Queue
-=======
 from heapq import heappush, heappop
->>>>>>> 71c3119984e25a8f768b571222bde0cd55c852ad
 
 
 class Graph(object):
