@@ -171,6 +171,33 @@ class Graph(object):
                 holding.extend(self.g_dict[node])
         return path
 
+
+    def dijkstra_shortest_path(self, start):
+        prevs = {}
+        distances = {}
+        to_visit = []
+
+        distances[start] = 0
+        for node in self.nodes():
+            if node != start:
+                distances[node] = float('inf')
+                prevs[node] = None
+            heappush(to_visit, (distances[node], node))
+
+        while to_visit:
+            current_data = heappop(to_visit)
+            current_node = current_data[1]
+            current_dist = current_data[0]
+            for node, weight in self.neighbors(current_node).iteritems():
+                alt = current_dist + weight
+                if alt < distances[node]:
+                    to_visit.remove((distances[node], node))
+                    distances[node] = alt
+                    prevs[node] = current_node
+                    heappush(to_visit, (distances[node], node))
+
+        return distances, prevs
+
     def BellmanFord(self, start):
         """ !! Currently not working...
         Returns the shortest path possibilities of the graph from the start.
@@ -198,31 +225,6 @@ class Graph(object):
 
         return distance, predecessor
 
-    def dijkstra_shortest_path(self, start):
-        prevs = {}
-        distances = {}
-        to_visit = []
-
-        distances[start] = 0
-        for node in self.nodes():
-            if node != start:
-                distances[node] = float('inf')
-                prevs[node] = None
-            heappush(to_visit, (distances[node], node))
-
-        while to_visit:
-            current_data = heappop(to_visit)
-            current_node = current_data[1]
-            current_dist = current_data[0]
-            for node, weight in self.neighbors(current_node).iteritems():
-                alt = current_dist + weight
-                if alt < distances[node]:
-                    to_visit.remove((distances[node], node))
-                    distances[node] = alt
-                    prevs[node] = current_node
-                    heappush(to_visit, (distances[node], node))
-
-        return distances, prevs
 
 if __name__ == '__main__':
     from test_graph import populate
